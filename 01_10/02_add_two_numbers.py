@@ -37,14 +37,13 @@ class Solution(object):
         number = int((''.join(number_lst1))[::-1]) + int((''.join(number_lst2))[::-1])
         s_number = str(number)[::-1]
 
-        i, l3 = 0, ListNode(0)
-        res = l3
-        while i < len(s_number):
+        res = l3 = ListNode(0)
+        length = len(s_number)
+        for i in range(length - 1):
             l3.val = s_number[i]
             l3.next = ListNode(0)
             l3 = l3.next
-            i += 1
-        l3 = None
+        l3.next = ListNode(s_number[length - 1])
 
         # solution two
         carry, l3 = 0, ListNode(0)
@@ -55,11 +54,12 @@ class Solution(object):
             number = (p + q) % 10
             l3.val = carry + number
             carry = (p + q) // 10
-            l3.next = ListNode(0)
-            l3 = l3.next
-
+            if l1 != None and l2 != None:
+                l3.next = ListNode(0)
+                l3 = l3.next
+            else:
+                l3.next = None
             l1 = l1.next if l1 != None else None
             l2 = l2.next if l2 != None else None
-        l3 = None
 
         return res
