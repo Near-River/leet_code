@@ -22,10 +22,10 @@ class Solution(object):
         :type numRows: int
         :rtype: str
         """
-        if s == '' or s.strip() == '': return s
-        if numRows == 1: return s
-
+        # solution one
+        if s == '' or s.strip() == '' or numRows == 1: return s
         length, loop_num = len(s), 2 * (numRows - 1)
+
         lst = [[] for i in range(numRows)]
         count = 0
         while length >= loop_num:
@@ -43,9 +43,21 @@ class Solution(object):
                     lst[i].append(s[count * loop_num + 2 * (numRows - 1) - i])
         s = reduce(lambda s1, s2: s1 + s2, (map(lambda l: ''.join(l), lst)))
 
-        return s
+        # solution two
+        res = ''
+        for i in range(numRows):
+            j = i
+            while j < length:
+                res += s[j]
+                if i > 0 and i < numRows - 1:
+                    idx = j + 2 * (numRows - i - 1)
+                    if idx < length: res += s[idx]
+                j += loop_num
+
+        return res
 
 
 if __name__ == '__main__':
     solution = Solution()
     print(solution.convert(s='abcdefg', numRows=5))
+    print(solution.convert(s='abc', numRows=2))

@@ -35,7 +35,7 @@ class Solution(object):
         INT_MAX, INT_MIN = 2147483647, -2147483648
 
         if s.startswith('+'):
-            s = s[1::]
+            s = s[1:]
         elif s.startswith('-'):
             flag = False
             s = s[1:]
@@ -47,7 +47,7 @@ class Solution(object):
                 s = s[:i]
                 break
 
-        if s == '' or s.strip() == '': return 0
+        if s == '': return 0
         res = int(s) if flag else -1 * int(s)
         if res < INT_MIN: return INT_MIN
         if res > INT_MAX: return INT_MAX
