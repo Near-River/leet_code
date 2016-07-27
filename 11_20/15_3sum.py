@@ -43,6 +43,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
+        nums = sorted(nums)  # sorting the number list
         length, ret = len(nums), set()
         for i in range(length - 2):
             first, tail = i + 1, length - 1
