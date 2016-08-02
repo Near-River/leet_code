@@ -1,0 +1,6 @@
+This is a dynamic programming question. Usually, solving and fully understanding a dynamic programming problem is a 4 step process:
+    Start with the recursive backtracking solution
+    Optimize by using a memoization table (top-down dynamic programming)
+    Remove the need for recursion (bottom-up dynamic programming)
+    Apply final tricks to reduce the time / memory complexity
+    (详见 p55)
