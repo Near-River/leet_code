@@ -26,27 +26,50 @@ class Solution(object):
         ret = []
         _m, _n, i = m, n, 0
         while _m > 0 and _n > 0:
-            for j in range(_n - 1): ret.append(matrix[i][i + j])
+            lst1, lst2, lst3, lst4 = [], [], [], []
+            for j in range(_n - 1):
+                lst1.append(matrix[i][i + j])
+                lst3.append(matrix[m - i - 1][n - j - i - 1])
+            for j in range(_m - 1):
+                lst2.append(matrix[i + j][n - i - 1])
+                lst4.append(matrix[m - j - i - 1][i])
+            ret.extend(lst1)
             if _m == 1:
                 ret.append(matrix[i][i + _n - 1])
                 break
-            for j in range(_m - 1): ret.append(matrix[i + j][n - i - 1])
+            ret.extend(lst2)
             if _n == 1:
                 ret.append(matrix[i + _m - 1][n - i - 1])
                 break
-            for j in range(_n - 1): ret.append(matrix[m - i - 1][n - j - i - 1])
-            for j in range(_m - 1): ret.append(matrix[m - j - i - 1][i])
+            ret.extend(lst3)
+            ret.extend(lst4)
+            i += 1
             _n -= 2
             _m -= 2
-            i += 1
-            if _m == 1 and _n == 1:
-                ret.append(matrix[i][i])
-                break
+
+            # for j in range(_n - 1): ret.append(matrix[i][i + j])
+            # if _m == 1:
+            #     ret.append(matrix[i][i + _n - 1])
+            #     break
+            # for j in range(_m - 1): ret.append(matrix[i + j][n - i - 1])
+            # if _n == 1:
+            #     ret.append(matrix[i + _m - 1][n - i - 1])
+            #     break
+            # for j in range(_n - 1): ret.append(matrix[m - i - 1][n - j - i - 1])
+            # for j in range(_m - 1): ret.append(matrix[m - j - i - 1][i])
+            # _n -= 2
+            # _m -= 2
+            # i += 1
+            # if _m == 1 and _n == 1:
+            #     ret.append(matrix[i][i])
+            #     break
         return ret
 
 
 if __name__ == '__main__':
     solution = Solution()
+    print(solution.spiralOrder([[1]]))
+    print(solution.spiralOrder([[1, 2, 3]]))
     print(solution.spiralOrder([
         [1, 2, 3],
         [4, 5, 6],
