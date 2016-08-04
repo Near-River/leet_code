@@ -38,7 +38,7 @@ class Solution(object):
                     ret.append([nums[i]] + item)
             return ret
 
-        # # find all possible combinations of k numbers
+        # find all possible combinations of k numbers
         # return find_all_combinations(nums, k)
 
         # solution two: Time Limit Exceeded
