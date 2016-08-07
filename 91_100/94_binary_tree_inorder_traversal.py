@@ -34,7 +34,6 @@ class Solution(object):
         """
         # solution one: recursion
         if root is None: return []
-        if root.left is None and root.right is None: return [root.val]
         ret = []
         if root.left: ret.extend(self.inorderTraversal(root.left))
         ret.append(root.val)
@@ -52,11 +51,8 @@ class Solution(object):
                 curr.left = None
             else:
                 ret.append(curr.val)
-                if curr.right:
-                    stack.pop()
-                    stack.append(curr.right)
-                else:
-                    stack.pop()
+                stack.pop()
+                if curr.right: stack.append(curr.right)
 
         return ret
 
