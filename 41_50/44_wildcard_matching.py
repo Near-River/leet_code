@@ -63,12 +63,12 @@ class Solution(object):
                 star = j
                 j = star + 1
             elif star != -1:
-                preS += 1  # reset index of i, recover from the failed matching.
+                preS += 1  # reset the index of i and j, recover from the last failed matching.
                 i = preS
                 j = star + 1
             else:
                 return False
-        while j < n:  # 处理p结尾处多于的*号
+        while j < n:  # 处理p结尾处多余的*号
             if p[j] != '*': return False
             j += 1
         return j >= n

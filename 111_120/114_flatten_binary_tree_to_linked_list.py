@@ -47,15 +47,13 @@ class Solution(object):
         curr = root
         stack = []
         while True:
-            if curr.left or curr.right:
+            if curr.left:
                 if curr.right: stack.append(curr.right)
-                if curr.left:
-                    curr.right = curr.left
-                    curr.left = None
-                    curr = curr.right
-                else:
-                    curr.right = stack.pop()
-                    curr = curr.right
+                curr.right = curr.left
+                curr.left = None
+                curr = curr.right
+            elif curr.right:
+                curr = curr.right
             else:
                 if not stack: break
                 curr.right = stack.pop()
