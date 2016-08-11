@@ -33,19 +33,18 @@ class Solution(object):
         for i in range(length): map[nums[i]] = True
         for n in nums:
             if n in map:
-                temp = [n]
+                del map[n]
                 start = n - 1
                 if start in map:
                     while start in map:
-                        temp.append(start)
+                        del map[start]
                         start -= 1
                 end = n + 1
                 if end in map:
                     while end in map:
-                        temp.append(end)
+                        del map[end]
                         end += 1
                 ret = max(ret, end - start - 1)
-                for i in temp: del map[i]
         return ret
 
 

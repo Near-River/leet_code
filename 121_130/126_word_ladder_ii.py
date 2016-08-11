@@ -72,7 +72,7 @@ class Solution(object):
         ret = []
         wordlist.add(beginWord)
         wordlist.add(endWord)
-        prevMap = {}  # store the previors words which can transform to the target(next) word
+        prevMap = {}  # store the previous words which can transform to the target(next) word
         for word in wordlist: prevMap[word] = []
         candidates = [set(), set()]
         candidates[0].add(beginWord)
