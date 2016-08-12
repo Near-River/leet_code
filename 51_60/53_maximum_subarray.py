@@ -18,7 +18,7 @@ class Solution(object):
 
         # Tags: Dynamic Programming
         # solution one:
-        # ret, length = nums[0], len(nums)
+        ret, length = nums[0], len(nums)
         # start, end = 0, length
         #
         # def maximum_sum(nums, index):
@@ -62,7 +62,7 @@ class Solution(object):
                     break
         # return ret
 
-        # solution three: O(N)
+        # solution two optimization: O(N)
         length, ret = len(nums), nums[0]
         _sum = 0
         for i in range(length):
@@ -71,7 +71,7 @@ class Solution(object):
             ret = max(ret, _sum)
         # return ret
 
-        # solution two: Divide and Conquer
+        # solution three: Divide and Conquer
         ret = nums[0]
 
         def find_minimum_sum(nums):
@@ -89,7 +89,20 @@ class Solution(object):
                 return max(left, right)
 
         ret = max(find_minimum_sum(nums), ret)
-        return ret
+        # return ret
+
+        # solution four: Dynamic Programming
+        """
+        转移方程式如下：
+            local[i + 1] = Max(local[i] + A[i], A[i]);
+            global[i + 1] = Max(local[i + 1], global[i]);
+        """
+        length = len(nums)
+        _local = _global = nums[0]
+        for i in range(1, length):
+            _local = max(_local + nums[i], nums[i])
+            _global = max(_local, _global)
+        return _global
 
 
 if __name__ == '__main__':

@@ -41,7 +41,7 @@ class Solution(object):
                 node.left = None
             elif node.right:
                 stack.append(node.right)
-                node.right = False
+                node.right = None
             else:
                 ret.append(node.val)
                 stack.pop()
