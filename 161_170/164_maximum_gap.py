@@ -20,7 +20,6 @@ class Solution(object):
         nums = sorted(nums)
         gap = 0
         for i in range(len(nums) - 1, 0, -1):
-            print(i)
             gap = max(gap, nums[i] - nums[i - 1])
         # return gap
 
@@ -45,12 +44,23 @@ class Solution(object):
         if bucket_size == 0: return 0
         bucket_num = (B - A) // bucket_size + 1
         buckets = [[] for i in range(bucket_num)]
-        for k in nums: buckets[(k - A) // bucket_size].append(k)
-        _min, _max = min(buckets[0]), max(buckets[0])
+        bucket_mins = [0 for i in range(bucket_num)]
+        bucket_maxs = [0 for i in range(bucket_num)]
+
+        for k in nums:
+            idx = (k - A) // bucket_size
+            if not buckets[idx]:
+                buckets[idx].append(k)
+                bucket_mins[idx] = bucket_maxs[idx] = k
+            else:
+                bucket_mins[idx] = min(bucket_mins[idx], k)
+                bucket_maxs[idx] = max(bucket_maxs[idx], k)
+
+        _min, _max = bucket_mins[0], bucket_maxs[0]
         gap = _max - _min
         for i in range(1, bucket_num):
             if not buckets[i]: continue
-            _min2, _max2 = min(buckets[i]), max(buckets[i])
+            _min2, _max2 = bucket_mins[i], bucket_maxs[i]
             gap = max(gap, _min2 - _max)
             _min, _max = _min2, _max2
         return gap

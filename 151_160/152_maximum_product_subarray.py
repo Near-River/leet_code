@@ -38,14 +38,13 @@ class Solution(object):
         #             for k in range(j, i - 1, -1):
         #                 if nums[k] == 0: break
         #                 dp[i][j] *= nums[k]
-        #         else:
-        #             if flag[i][j - 1] * nums[j] == 0:
-        #                 if nums[j] > 0:
-        #                     flag[i][j] = 1
-        #                 elif nums[j] < 0:
-        #                     flag[i][j] = -1
-        #                 else:
-        #                     flag[i][j] = 0
+        #         elif flag[i][j - 1] * nums[j] == 0:
+        #             if nums[j] > 0:
+        #                 flag[i][j] = 1
+        #             elif nums[j] < 0:
+        #                 flag[i][j] = -1
+        #             else:
+        #                 flag[i][j] = 0
         #         dp[i][j] = max(dp[i][j - 1], dp[i + 1][j], dp[i][j])
         # return dp[0][-1]
 
@@ -66,14 +65,13 @@ class Solution(object):
         min_local[i + 1] = Min(Min(max_local[i] * A[i], A[i]),  min_local * A[i])
         """
         length, ret = len(nums), nums[0]
-        min_product = max_product = nums[0]
+        min_local = max_local = nums[0]
         for i in range(1, length):
-            _min = min_product * nums[i]
-            _max = max_product * nums[i]
-            _min, _max = min(_min, _max), max(_min, _max)
-            min_product = min(_min, nums[i])
-            max_product = max(_max, nums[i])
-            ret = max(ret, max_product)
+            _min = min_local * nums[i]
+            _max = max_local * nums[i]
+            _min, _max = min(_min, _max, nums[i]), max(_min, _max, nums[i])
+            min_local, max_local = _min, _max
+            ret = max(ret, max_local)
 
         return ret
 
