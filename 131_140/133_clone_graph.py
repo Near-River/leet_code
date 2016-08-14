@@ -65,7 +65,7 @@ class Solution(object):
 
         # solution two
         if node is None: return None
-        if node.label in self.map: return self.map[node]
+        if node.label in self.map: return self.map[node.label]
         root = UndirectedGraphNode(node.label)
         self.map[node.label] = root
         for neighbor in node.neighbors: root.neighbors.append(self.cloneGraph(neighbor))

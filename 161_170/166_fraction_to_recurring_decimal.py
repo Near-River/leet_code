@@ -30,9 +30,9 @@ class Solution(object):
             pos = a // b
             a = a % b
         if a == 0: return ret + str(pos)
-        a *= 10
         decimal = []
-        map = {a // 10: 0}
+        map = {a: 0}
+        a *= 10
         loop = False
         start = end = -1
         i = 1
