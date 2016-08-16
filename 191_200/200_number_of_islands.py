@@ -29,9 +29,9 @@ class Solution(object):
         :rtype: int
         """
         m, n = len(grid), len(grid[0])
-        board = [['0'] * (n + 1)]
+        board = [['0'] * (n + 2)]
         for l in grid: board.append(['0'] + l + ['0'])
-        board.append(['0'] * (n + 1))
+        board.append(['0'] * (n + 2))
         ret = 0
 
         def bfs(location):

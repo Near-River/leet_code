@@ -44,19 +44,8 @@ class Trie(object):
                 curr = node
         curr.isKey = True
 
-    def search(self, word):
-        curr = self.root
-        for ch in word:
-            if ch not in curr.childrens: return False
-            curr = curr.childrens[ch]
-        return curr.isKey
-
-    def startsWith(self, prefix):
-        curr = self.root
-        for ch in prefix:
-            if ch not in curr.childrens: return False
-            curr = curr.childrens[ch]
-        return True
+    def front(self):
+        return self.root
 
 
 class Solution(object):
@@ -66,27 +55,30 @@ class Solution(object):
         :type words: List[str]
         :rtype: List[str]
         """
-        if len(board) == 0: return []
-        m, n = len(board), len(board[0])
-        DIRECT_X = [1, 0, 0, -1]
-        DIRECT_Y = [0, 1, -1, 0]
-        trie = Trie()
-        for word in words: trie.insert(word)
-        ret = set()
 
         def search_word(root, loc, word):
-            if root.isKey: ret.add(word)
+            if root.isKey: self.ret.add(word)
             r, c = loc
             for k in range(4):
-                i = r + DIRECT_X[k]
-                j = c + DIRECT_Y[k]
+                i = r + self.DIRECT_X[k]
+                j = c + self.DIRECT_Y[k]
                 if 0 <= i < m and 0 <= j < n and board[i][j] != '#':
                     s = board[i][j]
                     if s in root.childrens:
                         board[i][j] = '#'
                         search_word(root.childrens[s], (i, j), word + s)
                         board[i][j] = s
-        root = trie.root
+
+        if len(board) == 0: return []
+        m, n = len(board), len(board[0])
+        trie = Trie()
+        for word in words: trie.insert(word)
+        root = trie.front()
+
+        self.DIRECT_X = [1, 0, 0, -1]
+        self.DIRECT_Y = [0, 1, -1, 0]
+        self.ret = set()
+
         for i in range(m):
             for j in range(n):
                 s = board[i][j]
@@ -94,7 +86,7 @@ class Solution(object):
                     board[i][j] = '#'
                     search_word(root.childrens[s], (i, j), s)
                     board[i][j] = s
-        return list(ret)
+        return list(self.ret)
 
 
 if __name__ == '__main__':
