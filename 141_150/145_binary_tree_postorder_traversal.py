@@ -31,6 +31,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
+        # solution one
         if root is None: return []
         stack = [root]
         ret = []
@@ -45,7 +46,25 @@ class Solution(object):
             else:
                 ret.append(node.val)
                 stack.pop()
+        # return ret
 
+        # solution two
+        if root is None: return []
+        ret = []
+        stack = [root]
+        prev = None
+        while stack:
+            node = stack[-1]
+            if (node.left is None and node.right is None) or prev is not None and (
+                            prev == node.left or prev == node.right):
+                ret.append(node.val)
+                prev = node
+                stack.pop()
+            else:
+                if node.right:
+                    stack.append(node.right)
+                if node.left:
+                    stack.append(node.left)
         return ret
 
 
