@@ -8,8 +8,6 @@ The algorithm should run in linear time and in O(1) space.
 Hint: How many majority elements could it possibly have?
 """
 
-from collections import defaultdict
-
 
 class Solution(object):
     def majorityElement(self, nums):
@@ -18,16 +16,16 @@ class Solution(object):
         :rtype: List[int]
         """
         # solution one: Hash Table
-        # n = len(nums)
-        # k = n // 3
-        # ret = []
-        # map = defaultdict(int)
-        # for i in range(n):
-        #     num = nums[i]
-        #     map[num] += 1
-        #     if map[num] > k:
-        #         ret.append(num)
-        #         map[num] = -n
+        n = len(nums)
+        k = n // 3
+        ret = []
+        map = dict.fromkeys(nums, 0)
+        for i in range(n):
+            num = nums[i]
+            map[num] += 1
+            if map[num] > k:
+                ret.append(num)
+                map[num] = -n
         # return ret
 
         # solution two: Majority Voting Algorithm
