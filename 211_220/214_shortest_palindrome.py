@@ -62,7 +62,6 @@ class Solution(object):
         return r[:len(s) - _next[-1]] + s
 
 
-
 if __name__ == '__main__':
     solution = Solution()
     print(solution.shortestPalindrome("aacecaaa"))

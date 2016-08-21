@@ -30,19 +30,19 @@ class Solution(object):
 
         # solution two: Sieve of Eratosthenes
         if n <= 2: return 0
-        isPrime = [True] * (n - 2)
+        isPrime = [True] * n
         i = 2
         while i ** 2 < n:
             if isPrime[i - 2]:
-                j = i
-                while i * j < n:
-                    isPrime[i * j - 2] = False
-                    j += 1
+                j = i * i
+                while j < n:
+                    isPrime[j] = False
+                    j += i
             i += 1
         count = 0
         for i in isPrime:
             if i: count += 1
-        return count
+        return count - 2
 
 
 if __name__ == '__main__':
