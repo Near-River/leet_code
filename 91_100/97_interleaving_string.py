@@ -37,7 +37,6 @@ class Solution(object):
             for j in dp[prev]:
                 e1, e2 = j
                 if e1 < n1 and s3[i] == s1[e1]: dp[curr].add((e1 + 1, e2))
-                print(s3[i])
                 if e2 < n2 and s3[i] == s2[e2]: dp[curr].add((e1, e2 + 1))
             if not dp[curr]: return False
         return True
